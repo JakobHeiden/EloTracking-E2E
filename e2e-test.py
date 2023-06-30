@@ -150,6 +150,23 @@ def removeNotifications():
 	while exists(Pattern("1658499573390.png").similar(0.94)):
 		click(find(Pattern("1658499573390.png").similar(0.90)).left(30))
 
+def testDeleteAndCreateRankingAndQueue():
+	deleteQueue()
+	deleteRanking()
+	if exists("1658858301128.png"):
+		for x in range(10):
+			type(str(x + 1) + " ")
+			sleep(1)
+		type(Key.ENTER)
+	createRanking()
+	addQueue()
+
+def testAddRankAndDeleteRanks():
+	gotoTestchannel()
+	command("/addrank @Gold\n 1200")
+	sleep(2)
+	command("/deleteranks")
+
 def testPermissions():
 	type("/setpermission")
 	sleep(0.5)
@@ -166,16 +183,22 @@ def testPermissions():
 	click("1677611703519.png")
 	type(Key.ENTER)
 
-def testDeleteAndCreateRankingAndQueue():
-	deleteQueue()
-	deleteRanking()
-	if exists("1658858301128.png"):
-		for x in range(10):
-			type(str(x + 1) + " ")
-			sleep(1)
-		type(Key.ENTER)
-	createRanking()
-	addQueue()
+def testSettings():
+	gotoTestchannel()
+	command("/settings")
+	click("1688128026181.png")
+	click("1688128061099.png")
+	sleep(0.3)
+	click("1688128080230.png")
+	click("1677694827847.png")
+	sleep(1.2)
+	type("1000")
+	click("1658853418852.png")
+	sleep(0.5)
+	click("1677694882627.png")
+	sleep(0.3)
+	click("1682957643367.png")
+	sleep(0.5)
 
 def testMisc():
 	join()
@@ -226,29 +249,6 @@ def testDisputeRuleAsWin():
 	fileDispute()
 	sleep(0.5)
 	click("1677694540878.png")
-
-def testAddRankAndDeleteRanks():
-	gotoTestchannel()
-	command("/addrank @Gold\n 1200")
-	sleep(2)
-	command("/deleteranks")
-	
-def testSettings():
-	gotoTestchannel()
-	command("/settings")
-	click("1677694769548.png")
-	click(Pattern("1677694786881.png").targetOffset(-3,18))
-	sleep(0.3)
-	click("1682957548657.png")
-	click("1677694827847.png")
-	sleep(1.2)
-	type("1000")
-	click("1658853418852.png")
-	sleep(0.5)
-	click("1677694882627.png")
-	sleep(0.3)
-	click("1682957643367.png")
-	sleep(0.5)
 	
 def testBan():
 	gotoTestchannel()
@@ -269,7 +269,7 @@ def testForcewin():
 	command("/forcewin testranking @Ente\n@Ente2")
 	
 def testRevertmatch():
-	channelRegion.click("1677695071295.png")
+	channelRegion.click("1688128205874.png")
 	rightClick("1677695097885.png")
 	hover("1677695112734.png")
 	click("1677695125066.png")
@@ -284,6 +284,7 @@ else:
 	isProductionBot = False
 setup()
 if True:
+	testDeleteAndCreateRankingAndQueue()
 	testAddRankAndDeleteRanks()
 	testSettings()
 	testBan()
@@ -291,7 +292,6 @@ if True:
 	testRevertmatch()
 	testSetRating()	
 	testPermissions()	
-	testDeleteAndCreateRankingAndQueue()
 	testMisc()
 	testWinLose()
 	testCancel()
